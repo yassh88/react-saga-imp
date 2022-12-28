@@ -1,16 +1,18 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
-export const todo = createAction("fetchTodo");
-console.log("todo", todo);
+import { createSlice } from "@reduxjs/toolkit";
 const postSlice = createSlice({
   name: "post",
   initialState: {
     posts: [],
+    isLoading: false,
   },
   reducers: {
     fetchData: (state, action) => {
-      return {
-        posts: action.payload,
-      };
+      state.isLoading = action.payload;
+      return state;
+    },
+    setData: (state, action) => {
+      state.posts = action.payload;
+      return state;
     },
   },
 });

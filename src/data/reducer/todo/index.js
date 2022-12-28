@@ -10,14 +10,13 @@ const todoSlice = createSlice({
   reducers: {
     fetchData: (state, action) => {
       console.log("action", action.payload);
-      return {
-        loading: action.payload,
-      };
+      state.loading = action.payload;
+      return state;
     },
     setData: (state, action) => {
-      return {
-        todos: action.payload,
-      };
+      state.todos = action.payload;
+      state.loading = false;
+      return state;
     },
   },
 });

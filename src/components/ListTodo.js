@@ -2,10 +2,17 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sagaActions } from "../data/action/todo";
 import todoSlice from "../data/reducer/todo";
+import postSlice from "../data/reducer/post";
 
 export default function() {
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todo.todos);
+  const todos = useSelector((state) =>
+    state.todo.todos ? state.todo.todos : []
+  );
+
+  const posts = useSelector((state) =>
+    state.post.posts ? state.post.posts : []
+  );
 
   console.log(todoSlice.actions.fetchData().type);
 
@@ -15,12 +22,26 @@ export default function() {
     });
   };
 
+  const renderPostsList = () => {
+    return posts.map((post) => {
+      return <p key={post.id}>{post.title}</p>;
+    });
+  };
+
   return (
-    <div>
-      <button onClick={() => dispatch(todoSlice.actions.fetchData(true))}>
-        Getdata
-      </button>
-      {renderList()}
+    <div style={{ display: "flex", "justify-content": "space-around" }}>
+      <div>
+        <button onClick={() => dispatch(todoSlice.actions.fetchData(true))}>
+          Get Todo
+        </button>
+        {renderList()}
+      </div>
+      <div>
+        <button onClick={() => dispatch(postSlice.actions.fetchData(true))}>
+          Get Post
+        </button>
+        {renderPostsList()}
+      </div>
     </div>
   );
 }

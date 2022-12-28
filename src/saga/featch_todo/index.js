@@ -6,7 +6,7 @@ import { todo } from "../../data/reducer/todo";
 
 console.log("todo", todo);
 
-export const { fetchData } = todoSlice.actions;
+export const { setData } = todoSlice.actions;
 let callAPI = async ({ url, method, data }) => {
   return await Axios({
     url,
@@ -18,19 +18,19 @@ let callAPI = async ({ url, method, data }) => {
 export function* fetchTodoDataSaga() {
   console.log("todo", todo().type);
   console.log("todoSlice.actions", todoSlice.actions);
-  console.log("todoSlice.actions", fetchData());
+  console.log("todoSlice.actions", setData());
 
   debugger;
   try {
     let result = yield call(() =>
       callAPI({ url: "https://jsonplaceholder.typicode.com/todos/" })
     );
-    yield put(fetchData(result.data));
+    yield put(setData(result.data));
   } catch (e) {
     yield put({ type: "TODO_FETCH_FAILED" });
   }
 }
 
 export default function* todoSaga() {
-  yield takeEvery(sagaActions.FETCH__TODO_DATA_SAGA, fetchTodoDataSaga);
+  yield takeEvery(todoSlice.actions.fetchData().type, fetchTodoDataSaga);
 }

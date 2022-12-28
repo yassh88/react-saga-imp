@@ -3,7 +3,7 @@ import Axios from "axios";
 import { sagaActions } from "../../data/action/post";
 import postSlice from "../../data/reducer/post";
 
-export const { fetchData } = postSlice.actions;
+export const { fetchData, setData } = postSlice.actions;
 
 let callAPI = async ({ url, method, data }) => {
   return await Axios({
@@ -16,14 +16,14 @@ let callAPI = async ({ url, method, data }) => {
 export function* fetchDataSaga() {
   try {
     let result = yield call(() =>
-      callAPI({ url: "https://jsonplaceholder.typicode.com/post/" })
+      callAPI({ url: "https://jsonplaceholder.typicode.com/posts" })
     );
-    yield put(fetchData(result.data));
+    yield put(setData(result.data));
   } catch (e) {
     yield put({ type: "TODO_FETCH_FAILED" });
   }
 }
 
 export default function* postSaga() {
-  yield takeLatest(sagaActions.FETCH_POST_DATA_SAGA, fetchDataSaga);
+  yield takeLatest(fetchData().type, fetchDataSaga);
 }

@@ -1,5 +1,6 @@
 import { useArray } from "./custom-hook/useArray";
 import React from "react";
+import LoadingHOC from "./loading-hoc";
 const CoustomHookArray = () => {
   const arrObj = useArray(["a", "b", "c"]);
 
@@ -16,7 +17,6 @@ const CoustomHookArray = () => {
       <div style={{ display: "flex", "justify-content": "space-around" }}>
         <button onClick={() => arrObj.addValue("d")}> Add Value </button>
         <button onClick={() => arrObj.removeByIndex(0)}>
-          {" "}
           Delete By Index 1{" "}
         </button>
         <button onClick={() => arrObj.removeValue("d")}> delete value d</button>
@@ -25,4 +25,4 @@ const CoustomHookArray = () => {
   );
 };
 
-export default CoustomHookArray;
+export default LoadingHOC(CoustomHookArray, true);

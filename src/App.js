@@ -5,6 +5,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 import ListTodo from "./components/ListTodo";
 import CoustomHookArray from "./components/CoustomHookArray";
+import AutoComplete from "./components/autocomplete";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Menus />
       <ListTodo />
       <CoustomHookArray />
+      <AutoComplete />
     </Provider>
   );
 }

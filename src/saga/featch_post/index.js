@@ -1,6 +1,5 @@
 import { call, takeEvery, put, takeLatest } from "redux-saga/effects";
 import Axios from "axios";
-import { sagaActions } from "../../data/action/post";
 import postSlice from "../../data/reducer/post";
 
 export const { fetchData, setData } = postSlice.actions;

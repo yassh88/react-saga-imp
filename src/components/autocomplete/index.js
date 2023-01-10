@@ -19,12 +19,12 @@ const AutoComplete = (init) => {
   const getFilteredArray = () =>
     arrayValues.filter((str) => value && str.includes(value));
 
-  const renderSuggestions = () => {
+  const renderSuggestions = useCallback(() => {
     const filteredData = getFilteredArray();
     return filteredData.map((val) => (
       <div onClick={() => setValues(val)}>{val}</div>
     ));
-  };
+  }, [value]);
 
   return (
     <>

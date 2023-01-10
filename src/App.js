@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import ListTodo from "./components/ListTodo";
 import CoustomHookArray from "./components/CoustomHookArray";
 import AutoComplete from "./components/autocomplete";
+import MyComponent from "./components/MyComponent";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <ListTodo />
       <CoustomHookArray />
       <AutoComplete />
+      <MyComponent />
     </Provider>
   );
 }
